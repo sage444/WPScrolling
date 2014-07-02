@@ -52,7 +52,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
         
         _titlesScrollViewHeight = 30.0f;
         
-        _titleFont = [UIFont fontWithName:@"Avenir-Light" size:30];
+        _titleFont = [UIFont fontWithName:@"Avenir-Light" size:34];
         _titleColor = [UIColor darkGrayColor];
         _selectedTitleColor = [UIColor whiteColor];
         
@@ -202,18 +202,14 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             NSInteger nextCurrentIndex = NSNotFound;
             CGFloat nextViewOriginX = 0;
             
-            //
-            // Shift 'content' to offset:
-            
             [self determineByOffset:scrollOffset
                     nextCurrentItem:&nextCurrentIndex
                     nextViewOriginX:&nextViewOriginX];
             
-            UIView * scrollToView = [self retrieveViewAtIndex:nextCurrentIndex];
-            scrollToView.frame = CGRectMake(nextViewOriginX, 0,
-                                            self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height);
+            //
+            // Shift 'content' to offset
+            
             self.contentScrollView.contentOffset = CGPointMake(scrollOffset, 0);
-            [self.contentScrollView addSubview:scrollToView];
             
             //
             // shift 'titles' to offset:
@@ -290,7 +286,20 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    NSLog(@"SCROLL OFFSET: %f", scrollView.contentOffset.x);
+    NSInteger nextCurrentIndex = NSNotFound;
+    CGFloat nextViewOriginX = 0;
+    
+    //
+    // Continue shifting 'content' to offset:
+    
+    [self determineByOffset:scrollView.contentOffset.x
+            nextCurrentItem:&nextCurrentIndex
+            nextViewOriginX:&nextViewOriginX];
+    
+    UIView * scrollToView = [self retrieveViewAtIndex:nextCurrentIndex];
+    scrollToView.frame = CGRectMake(nextViewOriginX, 0,
+                                    self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height);
+    [self.contentScrollView addSubview:scrollToView];
 }
 
 #pragma mark - Private: Common helpers:
