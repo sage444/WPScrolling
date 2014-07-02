@@ -19,6 +19,11 @@
 		846579691962B70F002FD403 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846579511962B70E002FD403 /* UIKit.framework */; };
 		846579711962B70F002FD403 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8465796F1962B70F002FD403 /* InfoPlist.strings */; };
 		846579731962B70F002FD403 /* WPScrollingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 846579721962B70F002FD403 /* WPScrollingTests.m */; };
+		8465797E1962B73B002FD403 /* WPRooViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8465797D1962B73B002FD403 /* WPRooViewController.m */; };
+		846579811962B775002FD403 /* WPScrollingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846579801962B775002FD403 /* WPScrollingView.m */; };
+		846579851962DEB2002FD403 /* cat1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 846579821962DEB2002FD403 /* cat1.jpg */; };
+		846579861962DEB2002FD403 /* cat2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 846579831962DEB2002FD403 /* cat2.jpg */; };
+		846579871962DEB2002FD403 /* notacat3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 846579841962DEB2002FD403 /* notacat3.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,13 @@
 		8465796E1962B70F002FD403 /* WPScrollingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WPScrollingTests-Info.plist"; sourceTree = "<group>"; };
 		846579701962B70F002FD403 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		846579721962B70F002FD403 /* WPScrollingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WPScrollingTests.m; sourceTree = "<group>"; };
+		8465797C1962B73B002FD403 /* WPRooViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPRooViewController.h; sourceTree = "<group>"; };
+		8465797D1962B73B002FD403 /* WPRooViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPRooViewController.m; sourceTree = "<group>"; };
+		8465797F1962B775002FD403 /* WPScrollingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPScrollingView.h; sourceTree = "<group>"; };
+		846579801962B775002FD403 /* WPScrollingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPScrollingView.m; sourceTree = "<group>"; };
+		846579821962DEB2002FD403 /* cat1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat1.jpg; sourceTree = SOURCE_ROOT; };
+		846579831962DEB2002FD403 /* cat2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat2.jpg; sourceTree = SOURCE_ROOT; };
+		846579841962DEB2002FD403 /* notacat3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notacat3.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +119,10 @@
 		846579531962B70E002FD403 /* WPScrolling */ = {
 			isa = PBXGroup;
 			children = (
+				8465797F1962B775002FD403 /* WPScrollingView.h */,
+				846579801962B775002FD403 /* WPScrollingView.m */,
+				8465797C1962B73B002FD403 /* WPRooViewController.h */,
+				8465797D1962B73B002FD403 /* WPRooViewController.m */,
 				8465795C1962B70E002FD403 /* WPAppDelegate.h */,
 				8465795D1962B70E002FD403 /* WPAppDelegate.m */,
 				8465795F1962B70E002FD403 /* Images.xcassets */,
@@ -118,6 +134,9 @@
 		846579541962B70E002FD403 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				846579821962DEB2002FD403 /* cat1.jpg */,
+				846579831962DEB2002FD403 /* cat2.jpg */,
+				846579841962DEB2002FD403 /* notacat3.jpg */,
 				846579551962B70E002FD403 /* WPScrolling-Info.plist */,
 				846579561962B70E002FD403 /* InfoPlist.strings */,
 				846579591962B70E002FD403 /* main.m */,
@@ -221,6 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				846579581962B70E002FD403 /* InfoPlist.strings in Resources */,
+				846579861962DEB2002FD403 /* cat2.jpg in Resources */,
+				846579871962DEB2002FD403 /* notacat3.jpg in Resources */,
+				846579851962DEB2002FD403 /* cat1.jpg in Resources */,
 				846579601962B70E002FD403 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,7 +263,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8465795A1962B70E002FD403 /* main.m in Sources */,
+				8465797E1962B73B002FD403 /* WPRooViewController.m in Sources */,
 				8465795E1962B70E002FD403 /* WPAppDelegate.m in Sources */,
+				846579811962B775002FD403 /* WPScrollingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WPScrolling/WPScrolling-Prefix.pch";
 				INFOPLIST_FILE = "WPScrolling/WPScrolling-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -374,6 +399,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WPScrolling/WPScrolling-Prefix.pch";
 				INFOPLIST_FILE = "WPScrolling/WPScrolling-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
