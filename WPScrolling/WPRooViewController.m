@@ -29,8 +29,8 @@
         self.scrollingView.topScrollView.backgroundColor = [UIColor lightGrayColor];
         self.scrollingView.titlesScrollView.backgroundColor = [UIColor blackColor];
         
-        self.titles = @[@"a cat", @"also a cat", @"not a cat"];
-        self.images = @[[UIImage imageNamed:@"cat1.jpg"], [UIImage imageNamed:@"cat2.jpg"], [UIImage imageNamed:@"notacat3.jpg"]];
+        self.titles = @[@"a cat", @"also a cat", @"not a cat", @"smile cat", @"cat's visa", @"domestic cat"];
+        self.images = @[@"cat1.jpg", @"cat2.jpg",@"notacat3.jpg", @"cat4.jpg", @"cat5.jpg", @"cat6.jpg"];
     }
     return self;
 }
@@ -68,14 +68,15 @@
 - (UIView *)wpScrollingView:(WPScrollingView *)scrollingView itemViewAtIndex:(NSUInteger)index withReusedItemView:(UIView *)view
 {
     if (view == nil) {
-        UIImageView * imageView = [[UIImageView alloc] initWithImage:self.images[index]];
+        UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.images[index]]];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.layer.masksToBounds = YES;
         view = imageView;
     }
     else
     {
         UIImageView * imageView = (UIImageView*)view;
-        imageView.image = self.images[index];
+        imageView.image = [UIImage imageNamed:self.images[index]];
     }
     return view;
 }

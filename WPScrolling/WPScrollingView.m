@@ -232,7 +232,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                 scrollToLabel = self.fakeLabel;
             }
             CGFloat scrollProgress = scrollOffset / self.contentScrollView.frame.size.width;
-            CGFloat titleOffset = (currentTitleLabel.width/2 + kMarginBetweenTitles + scrollToLabel.width/2) * scrollProgress;
+            CGFloat titleOffset = (currentTitleLabel.width/2 + 2*kMarginBetweenTitles + scrollToLabel.width/2) * scrollProgress;
             
             self.titlesScrollView.contentOffset = CGPointMake(titleOffset, 0);
             
@@ -242,7 +242,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
         {
             CGPoint currentTouchLocation = [recognizer locationInView:recognizer.view];
             
-            if (CGRectContainsPoint(self.titlesScrollView.frame, currentTouchLocation) && [recognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+            if (CGRectContainsPoint(self.titlesScrollView.frame, currentTouchLocation) && [recognizer isMemberOfClass:[UITapGestureRecognizer class]]) {
                 
                 //
                 // Single tap on title label, require scroll to appropriate section:
@@ -296,9 +296,11 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             nextCurrentItem:&nextCurrentIndex
             nextViewOriginX:&nextViewOriginX];
     
+    [UIView setAnimationsEnabled:NO];
     UIView * scrollToView = [self retrieveViewAtIndex:nextCurrentIndex];
     scrollToView.frame = CGRectMake(nextViewOriginX, 0,
                                     self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height);
+    [UIView setAnimationsEnabled:YES];
     [self.contentScrollView addSubview:scrollToView];
 }
 
@@ -311,7 +313,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     //
     // Prepare title labels:
 
-    int minTitlesCount = MIN(self.numberOfItems, kMinTitlesCount);
+    int minTitlesCount = self.numberOfItems;
     NSMutableArray * tmpTitlesList = [NSMutableArray arrayWithCapacity:minTitlesCount];
     for (int i = 0; i < minTitlesCount; i++) {
         UILabel * label = [UILabel new];

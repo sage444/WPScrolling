@@ -24,6 +24,9 @@
 		846579851962DEB2002FD403 /* cat1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 846579821962DEB2002FD403 /* cat1.jpg */; };
 		846579861962DEB2002FD403 /* cat2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 846579831962DEB2002FD403 /* cat2.jpg */; };
 		846579871962DEB2002FD403 /* notacat3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 846579841962DEB2002FD403 /* notacat3.jpg */; };
+		8465798E19654DA6002FD403 /* cat6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8465798B19654DA6002FD403 /* cat6.jpg */; };
+		8465798F19654DA6002FD403 /* cat5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8465798C19654DA6002FD403 /* cat5.jpg */; };
+		8465799019654DA6002FD403 /* cat4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8465798D19654DA6002FD403 /* cat4.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		846579821962DEB2002FD403 /* cat1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat1.jpg; sourceTree = SOURCE_ROOT; };
 		846579831962DEB2002FD403 /* cat2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat2.jpg; sourceTree = SOURCE_ROOT; };
 		846579841962DEB2002FD403 /* notacat3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notacat3.jpg; sourceTree = SOURCE_ROOT; };
+		8465798B19654DA6002FD403 /* cat6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat6.jpg; sourceTree = "<group>"; };
+		8465798C19654DA6002FD403 /* cat5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat5.jpg; sourceTree = "<group>"; };
+		8465798D19654DA6002FD403 /* cat4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat4.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,9 @@
 				846579821962DEB2002FD403 /* cat1.jpg */,
 				846579831962DEB2002FD403 /* cat2.jpg */,
 				846579841962DEB2002FD403 /* notacat3.jpg */,
+				8465798B19654DA6002FD403 /* cat6.jpg */,
+				8465798C19654DA6002FD403 /* cat5.jpg */,
+				8465798D19654DA6002FD403 /* cat4.jpg */,
 				846579551962B70E002FD403 /* WPScrolling-Info.plist */,
 				846579561962B70E002FD403 /* InfoPlist.strings */,
 				846579591962B70E002FD403 /* main.m */,
@@ -240,9 +249,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				846579581962B70E002FD403 /* InfoPlist.strings in Resources */,
+				8465798E19654DA6002FD403 /* cat6.jpg in Resources */,
 				846579861962DEB2002FD403 /* cat2.jpg in Resources */,
+				8465799019654DA6002FD403 /* cat4.jpg in Resources */,
 				846579871962DEB2002FD403 /* notacat3.jpg in Resources */,
 				846579851962DEB2002FD403 /* cat1.jpg in Resources */,
+				8465798F19654DA6002FD403 /* cat5.jpg in Resources */,
 				846579601962B70E002FD403 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
