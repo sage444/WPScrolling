@@ -131,7 +131,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     }
 }
 
-#pragma mark - Setter:
+#pragma mark - Setters, Accessors:
 
 - (void)setDatasource:(id<WPScrollingViewDatasource>)datasource
 {
@@ -174,6 +174,20 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 {
     _titlesScrollViewHeight = titlesScrollViewHeight;
     [self setNeedsLayout];
+}
+
+- (NSUInteger)currentSelectedIndex
+{
+    return self.currentItemIndex;
+}
+
+- (CGFloat)currentScrolledProgress
+{
+    CGFloat scrollProgress = (self.contentScrollView.frame.size.width * self.currentItemIndex + self.contentScrollView.contentOffset.x)/(self.contentScrollView.frame.size.width * self.numberOfItems);
+    if (scrollProgress < 0) {
+        scrollProgress = 1 + scrollProgress;
+    }
+    return scrollProgress;
 }
 
 #pragma mark - Gesture delegate:

@@ -26,6 +26,9 @@
 @property (nonatomic, strong) UIColor * titleColor;
 @property (nonatomic, strong) UIColor * selectedTitleColor;
 
+@property (readonly, nonatomic) NSUInteger currentSelectedIndex;
+@property (readonly, nonatomic) CGFloat currentScrolledProgress;
+
 @property (nonatomic, assign) id<WPScrollingViewDelegate> delegate;
 @property (nonatomic, assign) id<WPScrollingViewDatasource> datasource;
 
