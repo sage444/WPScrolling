@@ -15,7 +15,7 @@
 
 @interface WPScrollingView : UIView
 
-@property (readonly, nonatomic, strong) UIScrollView * topScrollView;
+@property (readonly, nonatomic, strong) UIView * topView;
 @property (readonly, nonatomic, strong) UIScrollView * titlesScrollView;
 @property (readonly, nonatomic, strong) UIScrollView * contentScrollView;
 
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UIColor * titleColor;
 @property (nonatomic, strong) UIColor * selectedTitleColor;
 
-@property (nonatomic, weak) id<WPScrollingViewDelegate> delegate;
+@property (nonatomic, assign) id<WPScrollingViewDelegate> delegate;
 @property (nonatomic, assign) id<WPScrollingViewDatasource> datasource;
 
 @end
@@ -52,5 +52,7 @@
 - (void)wpScrollingView:(WPScrollingView *)scrollingView willScrollToItemAtIndex:(NSUInteger)index;
 
 - (void)wpScrollingView:(WPScrollingView *)scrollingView didScrollToItemAtIndex:(NSUInteger)index;
+
+- (void)wpScrollingView:(WPScrollingView *)scrollingView didChangeScrollProgress:(CGFloat)scrollProgress;
 
 @end

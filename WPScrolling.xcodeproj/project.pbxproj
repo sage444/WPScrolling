@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841731AC1965B5ED003A0968 /* WPHeaderAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841731AB1965B5ED003A0968 /* WPHeaderAnimatedView.m */; };
 		8465794E1962B70E002FD403 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8465794D1962B70E002FD403 /* Foundation.framework */; };
 		846579501962B70E002FD403 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8465794F1962B70E002FD403 /* CoreGraphics.framework */; };
 		846579521962B70E002FD403 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846579511962B70E002FD403 /* UIKit.framework */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841731AA1965B5ED003A0968 /* WPHeaderAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPHeaderAnimatedView.h; sourceTree = "<group>"; };
+		841731AB1965B5ED003A0968 /* WPHeaderAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPHeaderAnimatedView.m; sourceTree = "<group>"; };
 		8465794A1962B70E002FD403 /* WPScrolling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WPScrolling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8465794D1962B70E002FD403 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8465794F1962B70E002FD403 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,8 @@
 		846579531962B70E002FD403 /* WPScrolling */ = {
 			isa = PBXGroup;
 			children = (
+				841731AA1965B5ED003A0968 /* WPHeaderAnimatedView.h */,
+				841731AB1965B5ED003A0968 /* WPHeaderAnimatedView.m */,
 				8465797F1962B775002FD403 /* WPScrollingView.h */,
 				846579801962B775002FD403 /* WPScrollingView.m */,
 				8465797C1962B73B002FD403 /* WPRooViewController.h */,
@@ -276,6 +281,7 @@
 			files = (
 				8465795A1962B70E002FD403 /* main.m in Sources */,
 				8465797E1962B73B002FD403 /* WPRooViewController.m in Sources */,
+				841731AC1965B5ED003A0968 /* WPHeaderAnimatedView.m in Sources */,
 				8465795E1962B70E002FD403 /* WPAppDelegate.m in Sources */,
 				846579811962B775002FD403 /* WPScrollingView.m in Sources */,
 			);
@@ -476,6 +482,7 @@
 				846579781962B70F002FD403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		846579791962B70F002FD403 /* Build configuration list for PBXNativeTarget "WPScrollingTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +491,7 @@
 				8465797B1962B70F002FD403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

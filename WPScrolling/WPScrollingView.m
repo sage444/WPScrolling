@@ -56,13 +56,11 @@ const CGFloat kMarginBetweenTitles = 10.0f;
         _titleColor = [UIColor darkGrayColor];
         _selectedTitleColor = [UIColor whiteColor];
         
-        _topScrollView = [UIScrollView new];
-        _topScrollView.delegate = self;
-        _topScrollView.userInteractionEnabled = NO;
-        [self addSubview:self.topScrollView];
+        _topView = [UIView new];
+        _topView.userInteractionEnabled = NO;
+        [self addSubview:self.topView];
         
         _titlesScrollView = [UIScrollView new];
-        _titlesScrollView.delegate = self;
         _titlesScrollView.userInteractionEnabled = NO;
         [self addSubview:self.titlesScrollView];
         
@@ -90,7 +88,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 
     const CGRect bounds = self.bounds;
     
-    self.topScrollView.frame = CGRectMake(0, 0, bounds.size.width, self.topScrollViewHeight);
+    self.topView.frame = CGRectMake(0, 0, bounds.size.width, self.topScrollViewHeight);
     
     [self layoutTitles];
     
@@ -110,7 +108,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 {
     const CGRect bounds = self.bounds;
     
-    self.titlesScrollView.frame = CGRectMake(0, self.topScrollView.frame.origin.y + self.topScrollView.height,
+    self.titlesScrollView.frame = CGRectMake(0, self.topView.frame.origin.y + self.topView.height,
                                              bounds.size.width, self.titlesScrollViewHeight);
     [self.titleLabels makeObjectsPerformSelector:@selector(sizeToFit)];
     
@@ -302,6 +300,15 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                                     self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height);
     [UIView setAnimationsEnabled:YES];
     [self.contentScrollView addSubview:scrollToView];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(wpScrollingView:didChangeScrollProgress:)]) {
+        CGFloat scrollProgress = (scrollView.frame.size.width * self.currentItemIndex + scrollView.contentOffset.x)/(scrollView.frame.size.width * self.numberOfItems);
+        if (scrollProgress < 0) {
+            scrollProgress = 1 + scrollProgress;
+        }
+        [self.delegate wpScrollingView:self
+               didChangeScrollProgress:scrollProgress];
+    }
 }
 
 #pragma mark - Private: Common helpers:

@@ -26,7 +26,7 @@
         // Custom initialization
         
         self.scrollingView = [WPScrollingView new];
-        self.scrollingView.topScrollView.backgroundColor = [UIColor lightGrayColor];
+        self.scrollingView.topView.backgroundColor = [UIColor lightGrayColor];
         self.scrollingView.titlesScrollView.backgroundColor = [UIColor blackColor];
         
         self.titles = @[@"a cat", @"also a cat", @"not a cat", @"smile cat", @"cat's visa", @"domestic cat"];
@@ -41,8 +41,20 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.scrollingView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     self.scrollingView.delegate = self;
     self.scrollingView.datasource = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.scrollingView.delegate = nil;
+    self.scrollingView.datasource = nil;
 }
 
 - (void)viewWillLayoutSubviews
@@ -84,6 +96,11 @@
 - (NSString *)wpScrollingView:(WPScrollingView *)scrollingView titleForItemAtIndex:(NSUInteger)index
 {
     return self.titles[index];
+}
+
+- (void)wpScrollingView:(WPScrollingView *)scrollingView didChangeScrollProgress:(CGFloat)scrollProgress
+{
+    NSLog(@"%f", scrollProgress);
 }
 
 @end
