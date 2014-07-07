@@ -79,7 +79,8 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     
     _contentScrollView = [UIScrollView new];
     _contentScrollView.delegate = self;
-    _contentScrollView.userInteractionEnabled = NO;
+    _contentScrollView.userInteractionEnabled = YES;
+    _contentScrollView.scrollEnabled = NO;
     [self addSubview:self.contentScrollView];
     
     UIPanGestureRecognizer * panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
@@ -105,7 +106,6 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     
     self.contentScrollView.frame = CGRectMake(0, self.titlesScrollView.frame.origin.y + self.titlesScrollView.height,
                                               bounds.size.width, bounds.size.height - self.titlesScrollView.frame.origin.y - self.titlesScrollView.height);
-    self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.width * self.numberOfItems, self.contentScrollView.height);
     
     for (UIView * subview in self.contentScrollView.subviews) {
         CGRect frame = subview.frame;
@@ -128,6 +128,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     self.titlesScrollView.contentSize = CGSizeMake(titleContentWidth, self.titlesScrollView.height);
     CGFloat itemX = kMarginBetweenTitles;
     NSInteger currentItem = self.currentItemIndex;
+
     for (int i = 0; i<self.titleLabels.count; i++) {
         UILabel * label = self.titleLabels[currentItem];
         CGRect lFrame = label.frame;
@@ -388,7 +389,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             nextCurrentItem:&nextCurrentIndex
             nextViewOriginX:&nextViewOriginX];
     
-    UILabel * nextTitleLabel = self.fakeLabel ? self.fakeLabel : [self retrieveTitleLabelAtIndex:nextCurrentIndex];
+    UILabel * nextTitleLabel = self.fakeLabel && (offset<0) ? self.fakeLabel : [self retrieveTitleLabelAtIndex:nextCurrentIndex];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(wpScrollingView:willScrollToItemAtIndex:)]) {
         [self.delegate wpScrollingView:self willScrollToItemAtIndex:nextCurrentIndex];
