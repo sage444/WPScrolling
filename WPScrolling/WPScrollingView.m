@@ -48,38 +48,49 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     if (self) {
         // Initialization code:
         
-        self.userInteractionEnabled = YES;
-        
-        _titlesScrollViewHeight = 30.0f;
-        
-        _titleFont = [UIFont fontWithName:@"Avenir-Light" size:34];
-        _titleColor = [UIColor darkGrayColor];
-        _selectedTitleColor = [UIColor whiteColor];
-        
-        _topView = [UIView new];
-        _topView.userInteractionEnabled = NO;
-        [self addSubview:self.topView];
-        
-        _titlesScrollView = [UIScrollView new];
-        _titlesScrollView.userInteractionEnabled = NO;
-        [self addSubview:self.titlesScrollView];
-        
-        _contentScrollView = [UIScrollView new];
-        _contentScrollView.delegate = self;
-        _contentScrollView.userInteractionEnabled = NO;
-        [self addSubview:self.contentScrollView];
-        
-        UIPanGestureRecognizer * panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                      action:@selector(swipeGestureAction:)];
-        panGesture.delegate = self;
-        [panGesture setMaximumNumberOfTouches:1];
-        [self addGestureRecognizer:panGesture];
-        
-        UITapGestureRecognizer * tapOnTitles = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                       action:@selector(swipeGestureAction:)];
-        [self addGestureRecognizer:tapOnTitles];
+        [self initialize];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self initialize];
+}
+
+- (void)initialize
+{
+    self.userInteractionEnabled = YES;
+    
+    _titlesScrollViewHeight = 30.0f;
+    
+    _titleFont = [UIFont fontWithName:@"Avenir-Light" size:34];
+    _titleColor = [UIColor darkGrayColor];
+    _selectedTitleColor = [UIColor whiteColor];
+    
+    _topView = [UIView new];
+    _topView.userInteractionEnabled = NO;
+    [self addSubview:self.topView];
+    
+    _titlesScrollView = [UIScrollView new];
+    _titlesScrollView.userInteractionEnabled = NO;
+    [self addSubview:self.titlesScrollView];
+    
+    _contentScrollView = [UIScrollView new];
+    _contentScrollView.delegate = self;
+    _contentScrollView.userInteractionEnabled = NO;
+    [self addSubview:self.contentScrollView];
+    
+    UIPanGestureRecognizer * panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(swipeGestureAction:)];
+    panGesture.delegate = self;
+    [panGesture setMaximumNumberOfTouches:1];
+    [self addGestureRecognizer:panGesture];
+    
+    UITapGestureRecognizer * tapOnTitles = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                   action:@selector(swipeGestureAction:)];
+    [self addGestureRecognizer:tapOnTitles];
 }
 
 - (void)layoutSubviews
