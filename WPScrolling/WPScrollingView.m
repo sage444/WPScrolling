@@ -238,10 +238,10 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             // shift 'titles' to offset:
             
             UILabel * scrollToLabel = [self retrieveTitleLabelAtIndex:nextCurrentIndex];
-            UILabel * currentTitleLabel = [self.titleLabels firstObject];
+            UILabel * currentTitleLabel = [self.titleLabels objectAtIndex:self.currentItemIndex];
+            CGFloat labelWidth = currentTitleLabel.width;
             if (scrollOffset<0) {
-                
-                UILabel * scrollToLabel = [self retrieveTitleLabelAtIndex:nextCurrentIndex];
+
                 if (self.fakeLabel == nil) {
                     self.fakeLabel = [[UILabel alloc] initWithFrame:CGRectMake(-(scrollToLabel.frame.size.width), 0,
                                                                                     scrollToLabel.width, scrollToLabel.height)];
@@ -253,9 +253,11 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                 self.fakeLabel.textColor = scrollToLabel.textColor;
                 self.fakeLabel.backgroundColor = scrollToLabel.backgroundColor;
                 scrollToLabel = self.fakeLabel;
+                
+                labelWidth = scrollToLabel.width;
             }
             CGFloat scrollProgress = scrollOffset / self.contentScrollView.frame.size.width;
-            CGFloat titleOffset = (currentTitleLabel.width/2 + 2*kMarginBetweenTitles + scrollToLabel.width/2) * scrollProgress;
+            CGFloat titleOffset = (kMarginBetweenTitles + labelWidth) * scrollProgress;
             
             self.titlesScrollView.contentOffset = CGPointMake(titleOffset, 0);
             
