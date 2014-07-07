@@ -21,6 +21,7 @@
 
 @property (nonatomic) CGFloat topScrollViewHeight;
 @property (nonatomic) CGFloat titlesScrollViewHeight;
+@property (nonatomic) CGFloat widthBetweenTitles;
 
 @property (nonatomic, strong) UIFont * titleFont;
 @property (nonatomic, strong) UIColor * titleColor;

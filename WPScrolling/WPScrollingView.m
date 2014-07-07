@@ -34,7 +34,9 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 @property (nonatomic) NSInteger currentItemIndex;
 @property (nonatomic) NSMutableArray * titleLabels;
 @property (nonatomic) NSMutableDictionary * reusedViews;
-@property (nonatomic) UILabel * fakeLabel;
+@property (nonatomic) CGFloat totalTitlesWidth;
+@property (nonatomic) UILabel * fakeLabelLeft;
+@property (nonatomic) UILabel * fakeLabelRight;
 
 @end
 
@@ -62,6 +64,8 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 - (void)initialize
 {
     self.userInteractionEnabled = YES;
+    
+    _widthBetweenTitles = kMarginBetweenTitles;
     
     _titlesScrollViewHeight = 30.0f;
     
@@ -123,10 +127,11 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                                              bounds.size.width, self.titlesScrollViewHeight);
     [self.titleLabels makeObjectsPerformSelector:@selector(sizeToFit)];
     
-    NSNumber * width = [self.titleLabels valueForKeyPath:@"@sum.width"];
-    CGFloat titleContentWidth = width.floatValue + self.titleLabels.count*kMarginBetweenTitles + kMarginBetweenTitles;
+    self.totalTitlesWidth = [[self.titleLabels valueForKeyPath:@"@sum.width"] floatValue];
+
+    CGFloat titleContentWidth = self.totalTitlesWidth + self.titleLabels.count*self.widthBetweenTitles + self.widthBetweenTitles;
     self.titlesScrollView.contentSize = CGSizeMake(titleContentWidth, self.titlesScrollView.height);
-    CGFloat itemX = kMarginBetweenTitles;
+    CGFloat itemX = self.widthBetweenTitles;
     NSInteger currentItem = self.currentItemIndex;
 
     for (int i = 0; i<self.titleLabels.count; i++) {
@@ -135,7 +140,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
         lFrame.origin.x = itemX;
         lFrame.size.height = self.titlesScrollView.height;
         label.frame = lFrame;
-        itemX += lFrame.size.width + kMarginBetweenTitles;
+        itemX += lFrame.size.width + self.widthBetweenTitles;
         currentItem++;
         if (currentItem >= self.titleLabels.count) {
             currentItem = 0;
@@ -186,6 +191,12 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 {
     _titlesScrollViewHeight = titlesScrollViewHeight;
     [self setNeedsLayout];
+}
+
+- (void)setWidthBetweenTitles:(CGFloat)widthBetweenTitles
+{
+    _widthBetweenTitles = widthBetweenTitles;
+    [self layoutTitles];
 }
 
 - (NSUInteger)currentSelectedIndex
@@ -243,24 +254,40 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             CGFloat labelWidth = currentTitleLabel.width;
             if (scrollOffset<0) {
 
-                if (self.fakeLabel == nil) {
-                    self.fakeLabel = [[UILabel alloc] initWithFrame:CGRectMake(-(scrollToLabel.frame.size.width), 0,
+                if (self.fakeLabelLeft == nil) {
+                    self.fakeLabelLeft = [[UILabel alloc] initWithFrame:CGRectMake(-(scrollToLabel.frame.size.width), 0,
                                                                                     scrollToLabel.width, scrollToLabel.height)];
-                    [self.titlesScrollView addSubview:self.fakeLabel];
+                    [self.titlesScrollView addSubview:self.fakeLabelLeft];
+                    
+                    self.fakeLabelLeft.text = scrollToLabel.text;
+                    self.fakeLabelLeft.font = scrollToLabel.font;
+                    self.fakeLabelLeft.textColor = scrollToLabel.textColor;
+                    self.fakeLabelLeft.backgroundColor = scrollToLabel.backgroundColor;
                 }
                 
-                self.fakeLabel.text = scrollToLabel.text;
-                self.fakeLabel.font = scrollToLabel.font;
-                self.fakeLabel.textColor = scrollToLabel.textColor;
-                self.fakeLabel.backgroundColor = scrollToLabel.backgroundColor;
-                scrollToLabel = self.fakeLabel;
+                scrollToLabel = self.fakeLabelLeft;
                 
                 labelWidth = scrollToLabel.width;
             }
+            
             CGFloat scrollProgress = scrollOffset / self.contentScrollView.frame.size.width;
-            CGFloat titleOffset = (kMarginBetweenTitles + labelWidth) * scrollProgress;
+            CGFloat titleOffset = (self.widthBetweenTitles + labelWidth) * scrollProgress;
             
             self.titlesScrollView.contentOffset = CGPointMake(titleOffset, 0);
+            
+            if (self.totalTitlesWidth < self.titlesScrollView.frame.size.width - self.titlesScrollView.contentOffset.x) {
+                if (self.fakeLabelRight == nil) {
+                    
+                    UILabel * overLastLabel = [self retrieveTitleLabelAtIndex:(nextCurrentIndex + self.titleLabels.count-1)%self.titleLabels.count];
+                    self.fakeLabelRight = [[UILabel alloc] initWithFrame:CGRectMake(self.titlesScrollView.contentSize.width, overLastLabel.frame.origin.y,
+                                                                                    overLastLabel.frame.size.width, overLastLabel.frame.size.height)];
+                    self.fakeLabelRight.backgroundColor = overLastLabel.backgroundColor;
+                    self.fakeLabelRight.textColor = self.titleColor;
+                    self.fakeLabelRight.font = overLastLabel.font;
+                    self.fakeLabelRight.text = overLastLabel.text;
+                    [self.titlesScrollView addSubview:self.fakeLabelRight];
+                }
+            }
             
         }
             break;
@@ -272,8 +299,8 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                 
                 //
                 // Single tap on title label, require scroll to appropriate section:
-                
-                if (currentTouchLocation.x > kMarginBetweenTitles+[self retrieveTitleLabelAtIndex:self.currentItemIndex].width) {
+                // TODO: implement transition to actual tapped title's section instead of just next item:
+                if (currentTouchLocation.x > self.widthBetweenTitles+[self retrieveTitleLabelAtIndex:self.currentItemIndex].width) {
                     [self completeScrollByOffset:320.0f];
                 }
             }
@@ -291,8 +318,10 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                                      self.titlesScrollView.contentOffset = CGPointZero;
                                  }
                                  completion:^(BOOL finished) {
-                                     [self.fakeLabel removeFromSuperview];
-                                     self.fakeLabel = nil;
+                                     [self.fakeLabelLeft removeFromSuperview];
+                                     [self.fakeLabelRight removeFromSuperview];
+                                     self.fakeLabelLeft = nil;
+                                     self.fakeLabelRight = nil;
                                  }];
             }
             else
@@ -389,7 +418,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             nextCurrentItem:&nextCurrentIndex
             nextViewOriginX:&nextViewOriginX];
     
-    UILabel * nextTitleLabel = self.fakeLabel && (offset<0) ? self.fakeLabel : [self retrieveTitleLabelAtIndex:nextCurrentIndex];
+    UILabel * nextTitleLabel = self.fakeLabelLeft && (offset<0) ? self.fakeLabelLeft : [self retrieveTitleLabelAtIndex:nextCurrentIndex];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(wpScrollingView:willScrollToItemAtIndex:)]) {
         [self.delegate wpScrollingView:self willScrollToItemAtIndex:nextCurrentIndex];
@@ -400,11 +429,13 @@ const CGFloat kMarginBetweenTitles = 10.0f;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.contentScrollView.contentOffset = CGPointMake(nextViewOriginX, 0);
-                         self.titlesScrollView.contentOffset = CGPointMake(nextTitleLabel.frame.origin.x-kMarginBetweenTitles, 0);
+                         self.titlesScrollView.contentOffset = CGPointMake(nextTitleLabel.frame.origin.x-self.widthBetweenTitles, 0);
                      }
                      completion:^(BOOL finished) {
-                         [self.fakeLabel removeFromSuperview];
-                         self.fakeLabel = nil;
+                         [self.fakeLabelLeft removeFromSuperview];
+                         [self.fakeLabelRight removeFromSuperview];
+                         self.fakeLabelLeft = nil;
+                         self.fakeLabelRight = nil;
                          self.currentItemIndex = nextCurrentIndex;
                          [self scrollToCenter];
                          
