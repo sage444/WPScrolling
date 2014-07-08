@@ -275,7 +275,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
             
             self.titlesScrollView.contentOffset = CGPointMake(titleOffset, 0);
             
-            if (self.totalTitlesWidth < self.titlesScrollView.frame.size.width - self.titlesScrollView.contentOffset.x) {
+            if (self.totalTitlesWidth - self.titlesScrollView.contentOffset.x < self.titlesScrollView.frame.size.width) {
                 if (self.fakeLabelRight == nil) {
                     
                     UILabel * overLastLabel = [self retrieveTitleLabelAtIndex:(nextCurrentIndex + self.titleLabels.count-1)%self.titleLabels.count];
