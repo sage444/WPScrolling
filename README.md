@@ -3,5 +3,8 @@ WPScrolling
 
 Infinite scroll view control, very similar to windows phone UI
 
+example 1
+![alt tag](https://raw.githubusercontent.com/MykolaDenysyuk/WPScrolling/master/WPScrolling/scrolling_demo_gif.gif)
 
-![alt tag](http://i.gyazo.com/ea9e370a1b453d809cfc0ff63f26f13f.gif)
+example 2
+![alt tag](https://raw.githubusercontent.com/MykolaDenysyuk/WPScrolling/master/WPScrolling/scrolling_demo_gif_large.gif)
