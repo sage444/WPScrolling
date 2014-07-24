@@ -177,8 +177,10 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 - (void)setSelectedTitleColor:(UIColor *)selectedTitleColor
 {
     _selectedTitleColor = selectedTitleColor;
-    UILabel * selectedLabel = [self.titleLabels objectAtIndex:self.currentItemIndex];
-    selectedLabel.textColor = selectedTitleColor;
+    if (self.titleLabels.count>self.currentItemIndex) {
+        UILabel * selectedLabel = [self.titleLabels objectAtIndex:self.currentItemIndex];
+        selectedLabel.textColor = selectedTitleColor;
+    }
 }
 
 - (void)setTopScrollViewHeight:(CGFloat)topScrollViewHeight

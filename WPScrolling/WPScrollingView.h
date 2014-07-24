@@ -33,6 +33,8 @@
 @property (nonatomic, assign) id<WPScrollingViewDelegate> delegate;
 @property (nonatomic, assign) id<WPScrollingViewDatasource> datasource;
 
+- (void)reloadData;
+
 @end
 
 //
