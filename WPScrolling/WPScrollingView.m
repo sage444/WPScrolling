@@ -393,6 +393,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     }
     [self.titleLabels removeAllObjects];
     self.titleLabels = tmpTitlesList;
+    [self layoutTitles];
     
     //
     // Prepare reusable views storage:
