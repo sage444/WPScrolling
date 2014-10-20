@@ -381,6 +381,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     {
         return;
     }
+    _dataLoadLock = YES;
     self.numberOfItems = [self.datasource numberOfItemsInWPScrollingView:self];
     
     //
@@ -417,6 +418,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     //  and in the last order relayout views:
     
     [self setNeedsDisplay];
+    _dataLoadLock = NO;
 }
 
 - (void)completeScrollByOffset:(CGFloat)offset
