@@ -41,6 +41,9 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 @end
 
 @implementation WPScrollingView
+{
+    BOOL _dataLoadLock;
+}
 
 #pragma mark - Initialization:
 
@@ -374,11 +377,15 @@ const CGFloat kMarginBetweenTitles = 10.0f;
 
 - (void)reloadData
 {
+    if (_dataLoadLock)
+    {
+        return;
+    }
     self.numberOfItems = [self.datasource numberOfItemsInWPScrollingView:self];
     
     //
     // Prepare title labels:
-
+    
     int minTitlesCount = self.numberOfItems;
     NSMutableArray * tmpTitlesList = [NSMutableArray arrayWithCapacity:minTitlesCount];
     for (int i = 0; i < minTitlesCount; i++) {
