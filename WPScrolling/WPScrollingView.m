@@ -386,7 +386,7 @@ const CGFloat kMarginBetweenTitles = 10.0f;
     
     //
     // Prepare title labels:
-    
+
     int minTitlesCount = self.numberOfItems;
     NSMutableArray * tmpTitlesList = [NSMutableArray arrayWithCapacity:minTitlesCount];
     for (int i = 0; i < minTitlesCount; i++) {
